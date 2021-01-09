@@ -248,7 +248,12 @@ int joueur_suivant (int joueur) {
     return (joueur %2 + 1);
 }
 
-/* Permet au joueur de choisir un coup */
+/* La fonction quitter */
+int quitter(char touche1){
+     if (touche1=='q')
+       return 1;}
+
+/* Permet au joueur de choisir un coup ainsi de recommencer ou quitter la partie */
 void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
     char c;
     if (joueur==1)
@@ -257,6 +262,8 @@ void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
         printf ("\nC'est au tour du joueur %d de jouer(blanc)\n", joueur);
     printf ("Choisissez une case (ex: A1) :\n");
     scanf ("\n%c", &c);
+    if(c=='r') menu();/*si le joueur veut recommencer la partie*/
+    else if(quitter(c)==1) exit(0);/*si le joueur veut quitter la partie*/
     /* On change les minuscules en majuscules */
     if ((c >= 'a') && (c < 'a'+N))
         c = c + 'A' - 'a';
@@ -450,13 +457,6 @@ void jouer_coup (t_matrice m, int lig, int col, int joueur) {
 
 
 
-/* La fonction quitter */
-int quitter(char touche1){
-     if (touche1=='q')
-       return 1;
-
-}
-
 
 
 
@@ -508,20 +508,14 @@ int main()
             init_matrice (m);
             afficher_matrice (m);
 
-
+             printf("si vous desirez recommencer la partie, appuyer sur la touche r ,sinon cliquer sur entrer\n");
+             printf("si vous desirez quitter le jeu,appuyer sur la touche q,sinon cliquer sur entrer\n");
             /* Deroulement d'une partie */
             while (!partie_terminee (m)) {
                  choisir_coup (m, &lig, &col, joueur);
                  jouer_coup (m, lig, col, joueur);
                  afficher_matrice (m);
-                 printf("si vous desirez recommencer la partie, appuyer sur la touche r ,sinon cliquer sur entrer\n");
-                 printf("si vous desirez quitter le jeu,appuyer sur la touche q,sinon cliquer sur entrer\n");
-                 getchar();
-                 touche=getchar();
-                 if(touche=='r'){ menu();
-                                break;}
-                 else if(quitter(touche)==1) exit(0);
-                 else if (peut_jouer(m, joueur_suivant(joueur)))
+                if (peut_jouer(m, joueur_suivant(joueur)))
                    {joueur = joueur_suivant (joueur);}
                  else printf ("\nLe joueur %d passe son tour\n", joueur_suivant(joueur));
 
