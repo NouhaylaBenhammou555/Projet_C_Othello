@@ -23,9 +23,10 @@ void menu(){
     system("cls");
     printf("i-inserer vos informations personnelles \n");
     printf("c-commencer le jeu \n");
-    printf("r-recommencer le jeu des le debut\n");
+    printf("r-recommencer le jeu des le debut\n");   //ne sera fonctionnelle que si vous commencer le jeu
     printf("a-afficher la liste des joueurs \n");
     printf("t-top 10 meilleurs scores \n");
+    printf("h-afficher historique des mouvements \n");
     printf("v-visualiser une partie sauvegardee precedemment\n");
     printf("q-quitter le jeu \n");
     printf("Veuillez choisir une option \n");
@@ -65,14 +66,6 @@ void afficherListeJoueurs(liste_joueur debut){
        }
     }
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -248,12 +241,7 @@ int joueur_suivant (int joueur) {
     return (joueur %2 + 1);
 }
 
-/* La fonction quitter */
-int quitter(char touche1){
-     if (touche1=='q')
-       return 1;}
-
-/* Permet au joueur de choisir un coup ainsi de recommencer ou quitter la partie */
+/* Permet au joueur de choisir un coup */
 void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
     char c;
     if (joueur==1)
@@ -262,8 +250,12 @@ void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
         printf ("\nC'est au tour du joueur %d de jouer(blanc)\n", joueur);
     printf ("Choisissez une case (ex: A1) :\n");
     scanf ("\n%c", &c);
-    if(c=='r') menu();/*si le joueur veut recommencer la partie*/
-    else if(quitter(c)==1) exit(0);/*si le joueur veut quitter la partie*/
+    if(c=='r') {
+    	printf("**********************\n");
+    	main();
+    }
+
+    else if(c=='q') exit(0);
     /* On change les minuscules en majuscules */
     if ((c >= 'a') && (c < 'a'+N))
         c = c + 'A' - 'a';
@@ -283,11 +275,29 @@ void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
         scanf ("%d", lig);
         (*lig)--;
     }
+
+    // save pour visualiser la partie dans un fichier
+
+      FILE *fichier;
+      fichier = fopen("sauvegarde_Mouvements.txt", "w");
+
+            if (fichier == NULL)
+            {
+               exit(EXIT_FAILURE);
+            }
+           fprintf(fichier,"%c %d\n",*col,*lig);
+
+     fclose(fichier);
+
 }
+
+
+
 
 /* Verifie si la partie est terminee */
 int partie_terminee (t_matrice m) {
     int i, j, nb_noir, nb_blanc, cpt;
+
 
     /* On compte les pions noirs et les blancs */
     nb_noir = 0;
@@ -309,6 +319,7 @@ int partie_terminee (t_matrice m) {
     else if (nb_blanc > nb_noir)
         printf ("\nLe joueur 2 a gagne !!!\n");
     else printf ("\nLes deux joueurs sont a egalite\n");
+
 
     /* On range les pions par couleur et on affiche la grille */
     cpt = 0;
@@ -454,7 +465,19 @@ void jouer_coup (t_matrice m, int lig, int col, int joueur) {
 }
 
 
-
+/* La fonction visualiser */
+  void visualiser ()
+  {
+     char t1;
+     printf("voulez vous visualiser vos parties ?si oui tapez v\n");
+     scanf("%c" ,&t1);
+     if (t1=='v')
+     {
+       FILE *fichier;
+       fichier = fopen("sauvegarde_Mouvements.txt", "r");
+       fclose(fichier);
+      }
+  }
 
 
 
@@ -507,16 +530,15 @@ int main()
             /* Initialisation du jeu */
             init_matrice (m);
             afficher_matrice (m);
-
-             printf("si vous desirez recommencer la partie, appuyer sur la touche r ,sinon cliquer sur entrer\n");
-             printf("si vous desirez quitter le jeu,appuyer sur la touche q,sinon cliquer sur entrer\n");
+            printf("si vous desirez recommencer la partie, appuyer sur la touche r\n");
+            printf("si vous desirez quitter le jeu,appuyer sur la touche q\n");
             /* Deroulement d'une partie */
             while (!partie_terminee (m)) {
                  choisir_coup (m, &lig, &col, joueur);
                  jouer_coup (m, lig, col, joueur);
                  afficher_matrice (m);
-                if (peut_jouer(m, joueur_suivant(joueur)))
-                   {joueur = joueur_suivant (joueur);}
+                 if (peut_jouer(m, joueur_suivant(joueur)))
+                    joueur = joueur_suivant (joueur);
                  else printf ("\nLe joueur %d passe son tour\n", joueur_suivant(joueur));
 
            }
@@ -529,7 +551,15 @@ int main()
 
         break;
 
+        case 'v':
+              system("cls");
+              visualiser();
 
+        break;
+
+        case'q':
+            exit(0);
+        break;
 
     }
     scanf("%d",&tr);
