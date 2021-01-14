@@ -544,7 +544,7 @@ int main()
                  printf("si vous desirez recommencer la partie, appuyer sur la touche r ,sinon cliquer sur entrer\n");
                  getchar();
                  touche=getchar();
-                 printf("*****\n");
+                 printf("**************\n");
                  if(touche=='r'){ menu();
                                 break;}
                  if (peut_jouer(m, joueur_suivant(joueur)))
