@@ -250,14 +250,9 @@ void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
         printf ("\nC'est au tour du joueur %d de jouer(blanc)\n", joueur);
     printf ("Choisissez une case (ex: A1) :\n");
     scanf ("\n%c", &c);
-    if(c=='r') {
-    	printf("**********************\n");
-    	main();
-    }
-
-    else if(c=='q') exit(0);
+    if(c=='q') exit(0);
     /* On change les minuscules en majuscules */
-    if ((c >= 'a') && (c < 'a'+N))
+    else if ((c >= 'a') && (c < 'a'+N))
         c = c + 'A' - 'a';
     (*col) = c - 'A';
     scanf ("%d", lig);
@@ -275,17 +270,16 @@ void choisir_coup (t_matrice m, int *lig, int *col, int joueur) {
         scanf ("%d", lig);
         (*lig)--;
     }
-
-    // save pour visualiser la partie dans un fichier
-
+    const  int k=(*lig);
+    // sauvgarder chaque pour visualiser la partie dans un fichier
       FILE *fichier;
-      fichier = fopen("sauvegarde_Mouvements.txt", "w");
-
-            if (fichier == NULL)
+      fichier = fopen("sauvegarde_Mouvements.txt", "a");
+           if (fichier == NULL)
             {
                exit(EXIT_FAILURE);
             }
-           fprintf(fichier,"%c %d\n",*col,*lig);
+
+           fprintf(fichier,"%c%d\n",c,(k+1));
 
      fclose(fichier);
 
@@ -466,15 +460,25 @@ void jouer_coup (t_matrice m, int lig, int col, int joueur) {
 
 
 /* La fonction visualiser */
-  void visualiser ()
+void visualiser ()
   {
      char t1;
-     printf("voulez vous visualiser vos parties ?si oui tapez v\n");
-     scanf("%c" ,&t1);
-     if (t1=='v')
+     printf("voulez vous visualiser vos parties ?si oui tapez oui\n");
+     getchar();
+     t1=getchar();
+     if (t1=='o')
      {
        FILE *fichier;
        fichier = fopen("sauvegarde_Mouvements.txt", "r");
+       char  buff[255];
+       if (fichier == NULL)
+            {
+               exit(EXIT_FAILURE);
+            }
+         while(!feof(fichier))
+         {fscanf(fichier,"%s",buff);
+         printf("%s \n",buff);}
+
        fclose(fichier);
       }
   }
@@ -487,6 +491,7 @@ void jouer_coup (t_matrice m, int lig, int col, int joueur) {
 /* Le main */
 int main()
 {
+
     liste_joueur L1=NULL ;
     t_matrice m;
     int lig, col,score, joueur = 1;
@@ -530,13 +535,18 @@ int main()
             /* Initialisation du jeu */
             init_matrice (m);
             afficher_matrice (m);
-            printf("si vous desirez recommencer la partie, appuyer sur la touche r\n");
-            printf("si vous desirez quitter le jeu,appuyer sur la touche q\n");
+            printf("si vous desirez quitter la partie, appuyer sur la touche q a tout moment\n");
             /* Deroulement d'une partie */
             while (!partie_terminee (m)) {
                  choisir_coup (m, &lig, &col, joueur);
                  jouer_coup (m, lig, col, joueur);
                  afficher_matrice (m);
+                 printf("si vous desirez recommencer la partie, appuyer sur la touche r ,sinon cliquer sur entrer\n");
+                 getchar();
+                 touche=getchar();
+                 printf("*****\n");
+                 if(touche=='r'){ menu();
+                                break;}
                  if (peut_jouer(m, joueur_suivant(joueur)))
                     joueur = joueur_suivant (joueur);
                  else printf ("\nLe joueur %d passe son tour\n", joueur_suivant(joueur));
@@ -552,8 +562,9 @@ int main()
         break;
 
         case 'v':
-              system("cls");
-              visualiser();
+
+             visualiser();
+             printf("***\n");
 
         break;
 
