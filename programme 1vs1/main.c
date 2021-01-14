@@ -32,39 +32,82 @@ void menu(){
     printf("Veuillez choisir une option \n");
 }
 
+void inserer()
+{
+    FILE* fichier ;
+    char nom,mdp;
 
+    fichier = fopen(" fiche_joueurs.txt", "a");
 
+    if (fichier != NULL)
+    {
 
+        fichier = fopen(" fiche_joueur1.txt", "a");
 
-void insererNouveauJoueur(liste_joueur *debut,int *sc,char nom[30],char mdp[10] ){
-    joueur *j;
-    j=(joueur*)malloc(sizeof(joueur));
-    sc=(int*)malloc(sizeof(int));
-    j->score=sc;
-    strcpy(j->nom,nom);
-    strcpy(j->mot_de_passe,mdp );
-    j->next=NULL;
-    if(*debut==NULL) *debut=j;
-    else {
-        joueur *q ;
-        q=*debut ;
-        while(q->next!=NULL){
-            q=q->next;
-        }
-        q->next=j;
+       if (fichier != NULL)
+      {
+        printf("donnez le nom du joueur 1\n");
+        scanf("%d", &nom);
+        fprintf(fichier,"%s  ",nom);
+
+        printf("veuillez entrer le mot de passe du joueur 1\n ");
+        scanf("%d", &mdp);
+        fprintf(fichier, "%s  ", mdp);
+        fclose(fichier);
+      }
+
+        fichier = fopen(" fiche_joueur2.txt", "a");
+
+        if (fichier != NULL)
+     {
+
+        printf("donnez le nom du joueur 2\n");
+        scanf("%d", &nom);
+        fprintf(fichier,"%s  ",nom);
+
+        printf("veuillez entrer le mot de passe du joueur 2\n ");
+        scanf("%d", &mdp);
+        fprintf(fichier, "%s  ", mdp);
+        fclose(fichier);
+      }
+
     }
+        fclose(fichier);
 }
 
-void afficherListeJoueurs(liste_joueur debut){
-    joueur *j;
-    j=debut;
-    if(debut==NULL) printf("la liste est vide");
-    else{
-       while(j!=NULL){
-       printf("%s-%s-%d-0%d\n",j->nom,j->mot_de_passe,j->score );
-       j=j->next;
-       }
+
+void afficher()
+{
+    FILE* fichier = NULL;
+
+    fichier = fopen("fiche_joueurs.txt", "r");
+
+     if (fichier != NULL)
+    {
+
+        fichier = fopen(" fiche_joueur1.txt", "r");
+        char  buff1[255];
+       if (fichier != NULL)
+      {
+          while(!feof(fichier))
+         {fscanf(fichier,"%s",buff);
+         printf("%s \n",buff);}
+      }
+       fclose(fichier);
+
+      fichier = fopen(" fiche_joueur2.txt", "r");
+      char  buff2[255];
+       if (fichier != NULL)
+      {
+
+        while(!feof(fichier))
+         {fscanf(fichier,"%s",buff);
+         printf("%s \n",buff);}
+
+      }
+      fclose(fichier);
     }
+     fclose(fichier);
 }
 
 
