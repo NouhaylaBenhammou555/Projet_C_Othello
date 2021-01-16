@@ -9,16 +9,6 @@
 #define BLANC 'b' /* joueur 2 */
 
 
-
-
-//aprés avoir installer le jeu , l'utilisateur est mené à remplir la fiche de ses informations
-typedef struct ficheJoueur{
-    int score;      //score du joueur , initialisé par 0
-    char nom[30];         // nom du joueur
-    char mot_de_passe[10];        //mot de passe pour mieux sécuriser le jeu
-    struct ficheJoueur *next;
-}joueur;
-typedef joueur* liste_joueur;
 void menu(){
     system("cls");
     printf("i-inserer vos informations personnelles \n");
@@ -32,82 +22,67 @@ void menu(){
     printf("Veuillez choisir une option \n");
 }
 
-void inserer()
+ // la structure
+
+typedef struct ficheJoueur{
+	J joueur;
+    int score;      //score du joueur , initialisé par 0
+    char nom[30];         // nom du joueur
+    char mot_de_passe[10];        //mot de passe pour mieux sécuriser le jeu
+    struct ficheJoueur *next;
+}ficheJoueur;
+
+// l'insersion dans un fichier
+
+
+ficheJoueur* inserer(char* fiche_joueurs)
 {
-    FILE* fichier ;
-    char nom,mdp;
-
-    fichier = fopen(" fiche_joueurs.txt", "a");
-
-    if (fichier != NULL)
-    {
-
-        fichier = fopen(" fiche_joueur1.txt", "a");
-
-       if (fichier != NULL)
-      {
-        printf("donnez le nom du joueur 1\n");
-        scanf("%d", &nom);
-        fprintf(fichier,"%s  ",nom);
-
-        printf("veuillez entrer le mot de passe du joueur 1\n ");
-        scanf("%d", &mdp);
-        fprintf(fichier, "%s  ", mdp);
-        fclose(fichier);
-      }
-
-        fichier = fopen(" fiche_joueur2.txt", "a");
-
-        if (fichier != NULL)
-     {
-
-        printf("donnez le nom du joueur 2\n");
-        scanf("%d", &nom);
-        fprintf(fichier,"%s  ",nom);
-
-        printf("veuillez entrer le mot de passe du joueur 2\n ");
-        scanf("%d", &mdp);
-        fprintf(fichier, "%s  ", mdp);
-        fclose(fichier);
-      }
-
-    }
-        fclose(fichier);
+FILE* fichier= fopen("fiche_joueurs.txt","a");
+if (fichier==NULL)
+{
+printf("le fichier est inexistant\n");
+}
+else
+{
+joueurs* liste_joueurs;
+J joueur;
+rewind(fichier);//ou fseek(fichier,0,SEEK_SET);
+fscanf(fichier,"%s %s %d",joueur.nom,joueur.mdp,joueur.score);
+liste_joueurs= add(joueur,liste_joueurs);
+}
+}
+joueurs* add(J joueur , joueurs *liste_joueurs)
+{
+joueurs *save=(joueurs *)malloc(sizeof(joueurs));
+joueurs *parcours;
+strcpy(save->nom,joueur.nom);
+strcpy(save->mdp,joueur.mdp);
+strcpy(save->0,joueur.score);
+save->next=NULL;
+if(liste_joueurs==NULL)
+{
+liste_joueurs=save;
+}
+else
+{
+parcours=liste_joueurs;
+while(parcours->next!=NULL)
+{
+parcours=parcours->next;
+}
+parcours->next=save;
+}
 }
 
 
-void afficher()
+// l'affichage
+
+void afficherlistejoueurs()
 {
-    FILE* fichier = NULL;
+   FILE* fichier = NULL;
 
     fichier = fopen("fiche_joueurs.txt", "r");
-
-     if (fichier != NULL)
-    {
-
-        fichier = fopen(" fiche_joueur1.txt", "r");
-        char  buff1[255];
-       if (fichier != NULL)
-      {
-          while(!feof(fichier))
-         {fscanf(fichier,"%s",buff);
-         printf("%s \n",buff);}
-      }
-       fclose(fichier);
-
-      fichier = fopen(" fiche_joueur2.txt", "r");
-      char  buff2[255];
-       if (fichier != NULL)
-      {
-
-        while(!feof(fichier))
-         {fscanf(fichier,"%s",buff);
-         printf("%s \n",buff);}
-
-      }
-      fclose(fichier);
-    }
-     fclose(fichier);
+    fclose(fichier);
 }
 
 
