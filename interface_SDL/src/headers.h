@@ -1,0 +1,13 @@
+void tab_init();
+void recommencer();
+void meilleur_coup();
+int coup_possible ();
+void newtab();
+void affichage_tableau();
+void changement ();
+void jouer();
+void switch_joueurs();
+void suppression_coups_possibles();
+void score();
+void Sauvgarder();
+void data_backup();

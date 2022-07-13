@@ -1,0 +1,107 @@
+# depslib dependency file v1.0
+1612815132 source:c:\users\user\desktop\projetc\jeu1vs1.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612725171 c:\users\user\desktop\projetc\jeu1vs1.h
+
+1612725119 c:\users\user\desktop\projetc\jeu1vsmachine.h
+
+1612725171 c:\users\user\desktop\projetc\sauvegarde.h
+
+1612657847 c:\users\user\desktop\projetc\securite.h
+
+1612725119 source:c:\users\user\desktop\projetc\jeu1vsmachine.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612725119 source:c:\users\user\desktop\projetc\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612826770 source:c:\users\user\desktop\projetc\sauvegarde.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612657888 source:c:\users\user\desktop\projetc\securite.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612815132 source:c:\users\user\desktop\projetc_othello\jeu1vs1.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612725171 c:\users\user\desktop\projetc_othello\jeu1vs1.h
+
+1612725119 c:\users\user\desktop\projetc_othello\jeu1vsmachine.h
+
+1612725171 c:\users\user\desktop\projetc_othello\sauvegarde.h
+
+1612657847 c:\users\user\desktop\projetc_othello\securite.h
+
+1612725119 source:c:\users\user\desktop\projetc_othello\jeu1vsmachine.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612827063 source:c:\users\user\desktop\projetc_othello\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612826770 source:c:\users\user\desktop\projetc_othello\sauvegarde.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+
+1612657888 source:c:\users\user\desktop\projetc_othello\securite.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu1vs1.h"
+	"jeu1vsMachine.h"
+	"sauvegarde.h"
+	"securite.h"
+

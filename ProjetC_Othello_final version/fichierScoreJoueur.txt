@@ -1,0 +1,14 @@
+hamza 28
+Machine 36
+kamal 44
+samir 20
+hamid 24
+halim 40
+anass 19
+othman 45
+karim 23
+nouha 41
+kamal 50
+said 14
+hamza  36
+Machine  28
